@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+
+public class Numbers 
+{
+	public static final int SIZE = 12;
+	
+	public static void main(String[] args) 
+	{
+		int[] numbers = new int[SIZE];
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Please enter 12 two-digit numbers \n\n");
+		for (int i = 0; i < 12; i++)
+		{
+			System.out.println("Please enter number " + (i + 1) + ": ");
+			numbers[i] = input.nextInt();
+			
+			if (numbers[i] >= 100)
+			{
+				System.out.println("\tThat number is larger than 2-digits.");
+				System.out.println("Please enter number " + i);
+				numbers[i] = input.nextInt();
+			}
+		}
+	}
+
+}

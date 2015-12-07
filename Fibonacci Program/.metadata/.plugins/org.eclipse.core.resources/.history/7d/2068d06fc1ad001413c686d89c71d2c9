@@ -1,0 +1,126 @@
+import java.util.Scanner;
+
+
+public class Numbers 
+{
+	public static final int SIZE = 12;
+	
+	public static void main(String[] args) 
+	{
+		int[] numbers = new int[SIZE];
+		int[] subset;
+		int count = 0;
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Please enter 12 two-digit numbers \n\n");
+		for (int i = 0; i < SIZE; i++)
+		{
+			System.out.println("Please enter number " + (i + 1) + ": ");
+			numbers[i] = input.nextInt();
+			
+			while ((numbers[i] >= 100) || (numbers[i] < 10))
+			{
+				System.out.println("\tThat number is not two digits.");
+				System.out.println("Please enter number " + (i + 1) + ": ");
+				numbers[i] = input.nextInt();
+			}
+		}
+		
+		System.out.println("Now enter a 3-digit number: ");
+		int total = input.nextInt();
+		
+		while ((total >= 1000) || (total < 100))
+		{
+			System.out.println("\tThat number is not three digits.");
+			System.out.println("Please enter a 3-digit number: ");
+			total = input.nextInt();
+		}
+		
+		System.out.println("This program will now find a subset of your 2-digit numbers that equal your 3-digit number.");
+		
+		int totalNumbers = 0;
+		for (int i = 0; i < SIZE; i++)
+		{
+			totalNumbers += numbers[i];
+		}
+		
+		if (totalNumbers < total)
+		{
+			System.out.println("\n\nThis problem cannot be solved with the numbers entered.\nPlease exit the program and try again.");
+		}
+		else
+		{
+			doSelectionSort(numbers);
+			
+//			for (int i = 0; i < SIZE; i++)
+//			{
+//				System.out.print(numbers[i] + " ");
+//			}
+			
+			int newTotal = total;
+			
+			for (int i = (SIZE - 1); i > 0; i--)
+			{
+				if (newTotal >= 100)
+				{
+					newTotal -= numbers[i];
+//					System.out.println(numbers[i]);
+//					System.out.println(newTotal);
+					count += 1;
+				}
+			}
+			
+			int found = searchArray(newTotal, numbers);
+			
+			if (found != -1)
+			{
+				count += 1;
+				subset = new int[count];
+				for (int i = (SIZE - 1); i > 0; i--)
+				{
+//					for (int n = 0; n < count; n++)
+//					{
+						if (newTotal >= 100)
+						{
+							subset[i] = numbers[i];
+							System.out.println(subset[i]);
+						}
+//					}
+				}
+			}
+		}
+	}
+	
+	public static int[] doSelectionSort(int[] arr)
+	{
+        
+        for (int i = 0; i < arr.length - 1; i++)
+        {
+            int index = i;
+            for (int j = i + 1; j < arr.length; j++)
+                if (arr[j] < arr[index])
+                    index = j;
+      
+            int smallerNumber = arr[index]; 
+            arr[index] = arr[i];
+            arr[i] = smallerNumber;
+        }
+        return arr;
+    
+	}
+	
+	public static int searchArray(int num, int[] arr)
+	{
+		int found = -1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			if (num == arr[i])
+			{
+				found = i;
+			}
+		}
+		return found;
+	}
+
+}

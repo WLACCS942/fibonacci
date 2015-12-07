@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+
+public class Numbers 
+{
+	public static final int SIZE = 12;
+	
+	public static void main(String[] args) 
+	{
+		int[] numbers = new int[SIZE];
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Please enter 12 two-digit numbers \n\n");
+		for (int i = 0; i < SIZE; i++)
+		{
+			System.out.println("Please enter number " + (i + 1) + ": ");
+			numbers[i] = input.nextInt();
+			
+			while ((numbers[i] >= 100) || (numbers[i] < 10))
+			{
+				System.out.println("\tThat number is not two digits.");
+				System.out.println("Please enter number " + (i + 1) + ": ");
+				numbers[i] = input.nextInt();
+			}
+		}
+		
+		System.out.println("Now enter a 3-digit number: ");
+		int total = input.nextInt();
+		
+		while ((total >= 1000) || (total < 100))
+		{
+			System.out.println("\tThat number is not three digits.");
+			System.out.println("Please enter a 3-digit number: ");
+			total = input.nextInt();
+		}
+		
+		System.out.println("This program will now find a subset of your 2-digit numbers that equal your 3-digit number.");
+		
+		int totalNumbers = 0;
+		for (int i = 0; i < SIZE; i++)
+		{
+			totalNumbers += numbers[i];
+		}
+		
+		if (totalNumbers < total)
+		{
+			System.out.println("\n\nThis problem cannot be solved with the numbers entered.\nPlease exit the program and try again.");
+		}
+		else
+		{
+			SelectionSort(numbers);
+			for (int i = 0; i < SIZE; i++)
+			{
+				System.out.print(numbers[i] + " ");
+			}
+		}
+	}
+	
+	public static void SelectionSort ( int [ ] num )
+	{
+	     int i, j, first, temp;  
+	     for ( i = num.length - 1; i > 0; i-- )  
+	     {
+	          first = 0;   //initialize to subscript of first element
+	          for(j = 1; j <= i; j ++)   //locate smallest element between positions 1 and i.
+	          {
+	               if( num[ j ] < num[ first ] )         
+	                 first = j;
+	          }
+	          temp = num[ first ];   //swap smallest found with element in position i.
+	          num[ first ] = num[ i ];
+	          num[ i ] = temp; 
+	      }           
+	}
+
+}

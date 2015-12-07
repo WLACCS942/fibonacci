@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+
+public class Numbers 
+{
+	public static final int SIZE = 12;
+	
+	public static void main(String[] args) 
+	{
+		int[] numbers = new int[SIZE];
+		
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Please enter 12 two-digit numbers \n\n");
+		for (int i = 0; i < 12; i++)
+		{
+			System.out.println("Please enter number " + (i + 1) + ": ");
+			numbers[i] = input.nextInt();
+			
+			if (numbers[i] >= 100)
+			{
+				System.out.println("\tThat number is larger than two digits.");
+				System.out.println("Please enter number " + (i + 1) + ": ");
+				numbers[i] = input.nextInt();
+			}
+		}
+		
+		System.out.println("Now enter a 3-digit number: ");
+		int total = input.nextInt();
+		
+		if (total > 999)
+		{
+			System.out.println("\tThat number is larger than three digits.");
+			System.out.println("Please enter a 3-digit number: ");
+			total = input.nextInt();
+		}
+		
+		System.out.println("This program will now find a subset of your 2-digit numbers that equal your 3-digit number.");
+		
+	}
+
+}
